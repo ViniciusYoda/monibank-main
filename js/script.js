@@ -1,7 +1,7 @@
 import ehUmCPF from "./valida-cpf.js";
 import ehMaiorDeIdade from "./valida-idade.js";
 const camposDoFormulario = document.querySelectorAll("[required]")
-const formulario = document.querySelectorAll("[data-formulario]")
+const formulario = document.querySelector("[data-formulario]")
 
 formulario.addEventListener("submit", (e) => {
    e.preventDefault();
@@ -65,16 +65,16 @@ const mensagens = {
 function verificaCampo(campo) {
    let mensagem = "";
    campo.setCustomValidity('');
-   if (campo.name == "cpf" && campo.value.length >= 11) {
+   if (campo.name === "cpf" && campo.value.length >= 11) {
       ehUmCPF(campo)
    }
-   if (campo.name == "aniversairo" && campo.value != "") {
+   if (campo.name === "aniversario" && campo.value !== "") {
       ehMaiorDeIdade(campo);
    }
    tiposDeErro.forEach(erro => {
       if (campo.validity[erro]) {
          mensagem = mensagens[campo.name][erro];
-         console.log(mensagem);
+
       }
    })
    const mensagemErro = campo.parentNode.querySelector('.mensagem-erro');
